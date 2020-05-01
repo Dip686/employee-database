@@ -1,0 +1,30 @@
+.removeRole{
+  cursor: pointer;
+  padding: 5px;
+  border-radius: 5px;
+  background-color: rgb(255, 168, 168);
+  margin-bottom: 5px;
+}
+.roleEdit,.newRole {
+  border-radius: 5px;
+  padding: 5px;
+}
+.popup-container .webix_view{
+  overflow-y: scroll;
+}
+.addnewRole{
+  cursor: pointer;
+  padding: 5px 20px 5px 20px;
+  border-radius: 5px;
+  background-color: rgb(192, 255, 187);
+  margin-bottom: 5px;
+  margin-top: 5px;
+}
+.saveRoles {
+  cursor: pointer;
+  padding: 5px 20px 5px 20px;
+  border-radius: 5px;
+  background-color: rgb(162, 192, 255);
+  margin-bottom: 5px;
+  margin-top: 5px;
+}
