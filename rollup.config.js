@@ -4,15 +4,14 @@ import resolve from '@rollup/plugin-node-resolve';
 import commonjs from '@rollup/plugin-commonjs';
 import replace from '@rollup/plugin-replace';
 
+
 const PRODUCTION_ENV='production',
   DEVELOPMENT_ENV='development',
   currentEnv = process.env.NODE_ENV;
 
 let plugins=[
   resolve(), 
-  babel({
-    "presets": ["@babel/preset-react"]
-  }),
+  babel(),
   commonjs(),
   replace({
     'process.env.NODE_ENV': JSON.stringify( currentEnv )
