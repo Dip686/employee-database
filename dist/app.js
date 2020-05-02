@@ -2547,7 +2547,7 @@
 	      }, {
 	        view: "list",
 	        id: "empList",
-	        template: "#id# - #name# - #email# - #role#",
+	        template: "Name: #name# Email: #email# Role:  #role#",
 	        select: true,
 	        //enables selection 
 	        height: 400,
@@ -2565,12 +2565,10 @@
 	    width: 300,
 	    height: 400,
 	    body: {
-	      // template: createRolPopUp
 	      view: "form",
 	      id: "roleForm",
 	      width: 300,
-	      elements: [// { view:"editlist", template:"#value#", id:"editlist", name:"editlist", width:180, data:roleOption, editable:true, editor:"text", select:true}, 
-	      {
+	      elements: [{
 	        view: "list",
 	        template: `<input class= "role-edit" type ="text" value=#value# />`,
 	        id: "editlist",
