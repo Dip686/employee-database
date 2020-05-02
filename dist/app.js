@@ -2497,24 +2497,28 @@
 	      elements: [{
 	        view: "button",
 	        id: "addEmpDetails",
+	        css: "addEmpDetails",
 	        value: "Add",
 	        width: 100,
 	        click: saveEmpDetails
 	      }, {
 	        view: "button",
 	        id: "removeEmpDetails",
+	        css: "removeEmpDetails",
 	        value: "Remove",
 	        width: 100,
 	        click: delete_row
 	      }, {
 	        view: "button",
 	        id: "clearForm",
+	        css: "clearForm",
 	        value: "Clear",
 	        width: 100,
 	        click: () => $$("empForm").clear()
 	      }, {
 	        view: "button",
 	        id: "configureRoles",
+	        css: "configureRoles",
 	        value: "Configure Roles",
 	        width: 300,
 	        popup: "role_pop"
@@ -2547,7 +2551,7 @@
 	      }, {
 	        view: "list",
 	        id: "empList",
-	        template: "Name: #name# Email: #email# Role:  #role#",
+	        template: "Name: <b>#name#</b> &nbsp&nbsp&nbsp&nbsp Email: <b>#email#</b> &nbsp&nbsp&nbsp&nbsp Role: <b>#role#</b>",
 	        select: true,
 	        //enables selection 
 	        height: 400,
@@ -2587,16 +2591,16 @@
 	        borderless: true,
 	        cols: [{
 	          view: "button",
-	          id: "removeRole",
-	          value: "Remove",
-	          width: 120,
-	          click: deleteRoles
-	        }, {
-	          view: "button",
 	          id: "saveRole",
 	          value: "Save Roles",
 	          width: 120,
 	          click: saveRoles
+	        }, {
+	          view: "button",
+	          id: "removeRole",
+	          value: "Remove",
+	          width: 120,
+	          click: deleteRoles
 	        }]
 	      }]
 	    }

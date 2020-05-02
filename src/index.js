@@ -89,10 +89,10 @@ fetch('http://localhost:3000/data').then(res=>res.json()).then(function draw(dat
     rows: [
       { view:"toolbar", id:"mybar",
         elements:[
-          { view:"button", id:"addEmpDetails", value:"Add", width:100, click: saveEmpDetails }, 
-          { view:"button", id:"removeEmpDetails", value:"Remove", width:100, click: delete_row},
-          { view:"button", id:"clearForm", value:"Clear", width:100 , click:() => $$("empForm").clear()},
-          { view:"button", id:"configureRoles", value:"Configure Roles", width:300 ,popup:"role_pop"}
+          { view:"button", id:"addEmpDetails", css:"addEmpDetails",value:"Add", width:100, click: saveEmpDetails }, 
+          { view:"button", id:"removeEmpDetails", css:"removeEmpDetails", value:"Remove", width:100, click: delete_row},
+          { view:"button", id:"clearForm", css: "clearForm", value:"Clear", width:100 , click:() => $$("empForm").clear()},
+          { view:"button", id:"configureRoles", css:"configureRoles", value:"Configure Roles", width:300 ,popup:"role_pop"}
         ]
       },
       { cols:[
@@ -106,7 +106,7 @@ fetch('http://localhost:3000/data').then(res=>res.json()).then(function draw(dat
         {
           view:"list", 
           id:"empList",
-          template:"Name: #name# Email: #email# Role:  #role#", 
+          template:"Name: <b>#name#</b> &nbsp&nbsp&nbsp&nbsp Email: <b>#email#</b> &nbsp&nbsp&nbsp&nbsp Role: <b>#role#</b>", 
           select:true, //enables selection 
           height:400,
           data: userSet
