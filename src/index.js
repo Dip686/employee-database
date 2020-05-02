@@ -3,6 +3,12 @@ var webix = require('webix');
 fetch('http://localhost:3000/data').then(res=>res.json()).then(function draw(data){
   let userSet =data.userSet,
     roleOption=data.roleOption;
+  // utlity functions
+  /**
+   * @description this function finds whether provided id present in the elemment of the array
+   * @param {Array} arr given array in which id to be matched
+   * @param {number} id given to find if present in array 
+   */
   function findIndex(arr, id) {
     for (let index = 0; index < arr.length; index++) {
       const element = arr[index];
@@ -10,8 +16,12 @@ fetch('http://localhost:3000/data').then(res=>res.json()).then(function draw(dat
     }
     return -1;
   }
+  /**
+   * @description saves the employee details to the view and sends to the backend to store
+  */
   function saveEmpDetails(){
     const values = $$("empForm").getValues();
+    // if update to be done instead adding
     if (values.id){
       let indexOfItem = findIndex(userSet, values.id);
       if ( indexOfItem >= 0) {
@@ -20,19 +30,23 @@ fetch('http://localhost:3000/data').then(res=>res.json()).then(function draw(dat
       $$("addEmpDetails").define('value', 'Add');
       $$("addEmpDetails").refresh();
     }
-    else {
+    else {  // for new employee details
       userSet.push({
         name: values.name, email: values.email, role: values.role,id:userSet.length
       });
     }
+    //setting data
     $$("empList").define("data", userSet);
     $$("empList").refresh();
     $$("empForm").clear();
+    // sends data to the backend
     fetch('http://localhost:3000/userset',{method: 'post',  headers: {
       'Content-Type': 'application/json'
     }, body: JSON.stringify({"userSet": userSet})});
   }
-  
+  /**
+   * @description This function takes care of edit, add of roles
+   */
   function saveRoles () {
     let roles = document.querySelectorAll('.role-edit'),
       editedRoles = [],
@@ -46,10 +60,14 @@ fetch('http://localhost:3000/data').then(res=>res.json()).then(function draw(dat
     $$("editlist").refresh();
     $$("role").define('options', editedRoles);
     $$("role").refresh();
+    // sends latest role details to backend
     fetch('http://localhost:3000/roleoption',{method: 'post',headers: {
       'Content-Type': 'application/json'
     }, body: JSON.stringify({"roleOption": editedRoles})});
   }
+  /**
+   * @description This function takes care of delition of roles
+   */
   function deleteRoles () {
     let role = $$("editlist").getSelectedId();
     if(findIndex(roleOption, role) !== -1) {
@@ -58,13 +76,15 @@ fetch('http://localhost:3000/data').then(res=>res.json()).then(function draw(dat
       $$("editlist").refresh();
       $$("role").define('options', roleOption);
       $$("role").refresh();
-      console.log(roleOption);
+      // sends latest role details to backend
       fetch('http://localhost:3000/roleoption',{method: 'post',  headers: {
         'Content-Type': 'application/json'
       }, body: JSON.stringify({"roleOption": roleOption})});
     }
   }
-  
+  /**
+   * @description This function takes care of delition of user details
+   */
   function delete_row(){
     let id = $$("empList").getSelectedId();
     
@@ -77,6 +97,7 @@ fetch('http://localhost:3000/data').then(res=>res.json()).then(function draw(dat
           $$("empForm").clear();
           $$("addEmpDetails").define('value', 'Add');
           $$("addEmpDetails").refresh();
+          // sends latest role details to backend
           fetch('http://localhost:3000/userset',{method: 'post',  headers: {
             'Content-Type': 'application/json'
           }, body: JSON.stringify({"userSet": Array.from($$("empList").data.getRange())})});
@@ -84,15 +105,18 @@ fetch('http://localhost:3000/data').then(res=>res.json()).then(function draw(dat
       }
     });
   }
-  
+
+
+
+  // rendering part
   webix.ui({
     rows: [
       { view:"toolbar", id:"mybar",
         elements:[
-          { view:"button", id:"addEmpDetails", value:"Add", width:100, click: saveEmpDetails }, 
-          { view:"button", id:"removeEmpDetails", value:"Remove", width:100, click: delete_row},
-          { view:"button", id:"clearForm", value:"Clear", width:100 , click:() => $$("empForm").clear()},
-          { view:"button", id:"configureRoles", value:"Configure Roles", width:300 ,popup:"role_pop"}
+          { view:"button", id:"addEmpDetails", css:"addEmpDetails",value:"Add", width:100, click: saveEmpDetails }, 
+          { view:"button", id:"removeEmpDetails", css:"removeEmpDetails", value:"Remove", width:100, click: delete_row},
+          { view:"button", id:"clearForm", css: "clearForm", value:"Clear", width:100 , click:() => $$("empForm").clear()},
+          { view:"button", id:"configureRoles", css:"configureRoles", value:"Configure Roles", width:300 ,popup:"role_pop"}
         ]
       },
       { cols:[
@@ -106,7 +130,7 @@ fetch('http://localhost:3000/data').then(res=>res.json()).then(function draw(dat
         {
           view:"list", 
           id:"empList",
-          template:"Name: #name# Email: #email# Role:  #role#", 
+          template:"Name: #name# &nbsp&nbsp&nbsp&nbsp Email: #email# &nbsp&nbsp&nbsp&nbsp Role: #role#", 
           select:true, //enables selection 
           height:400,
           data: userSet

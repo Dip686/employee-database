@@ -28,3 +28,19 @@
   margin-bottom: 5px;
   margin-top: 5px;
 }
+.addEmpDetails button{
+  background-color: #058c05 !important;
+  color: white !important;
+}
+.removeEmpDetails button{
+  background-color: #da2626 !important;
+  color: white !important;
+}
+.clearForm button{
+  background-color: #8c8383 !important;
+  color: white !important;
+}
+.configureRoles button{
+  background-color: #ef9a00 !important;
+  color: white !important;
+}
