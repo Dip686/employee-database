@@ -182,7 +182,7 @@ fetch('http://localhost:3000/data').then(res=>res.json()).then(function draw(dat
       id:"roleForm", 
       width:300, 
       elements:[
-        { view:"list", template:`<input class= "role-edit" type ="text" value=#value# />`, id:"editlist", name:"editlist", width:180, data:roleOption, select:true}, 
+        { view:"list", template:`<input class= "role-edit" type ="text" value="#value#" />`, id:"editlist", name:"editlist", width:180, data:roleOption, select:true},
         { view:"text", id:"newRole", name:"newRole", placeholder:"New Role", width:180},
         {view:"toolbar",borderless:true,
           cols:[
