@@ -109,6 +109,35 @@ fetch('http://localhost:3000/data').then(res=>res.json()).then(function draw(dat
 
 
   // rendering part
+
+  // custom widget creation
+  webix.protoUI({
+  
+    name: "canvas_layers",
+    
+    $init() {
+      // First canvas
+      this.cv1 = document.createElement('canvas');
+      this.$view.appendChild(this.cv1);
+      
+    },
+    
+    $setSize(width, height) {
+      this.cv1.width = width;
+      this.cv1.height = height;      
+      this.render();
+    },
+    
+    render() {      
+      // Draw first canvas
+      const ctx1 = this.cv1.getContext('2d');  
+      ctx1.fillStyle = "#ff0000ff";
+      ctx1.fillRect(0, 0, this.cv1.width * .7, this.cv1.height * .7);
+      
+    },
+    
+  }, webix.ui.view);
+ // main container
   webix.ui({
     rows: [
       { view:"toolbar", id:"mybar",
@@ -124,7 +153,10 @@ fetch('http://localhost:3000/data').then(res=>res.json()).then(function draw(dat
           view:"form", id:"empForm", width:200, elements:[
             { view:"text", name:"name", placeholder:"Name", width:180, align:"center"}, 
             { view:"text", name:"email", placeholder:"Email", width:180, align:"center"}, 
-            { view:"combo", id:"role", name:"role",placeholder:"Role", width:300,  options: roleOption} 
+            { view:"combo", id:"role", name:"role",placeholder:"Role", width:300,  options: roleOption},
+            {
+              view: "canvas_layers"
+            }
           ]
         },
         {
@@ -138,9 +170,7 @@ fetch('http://localhost:3000/data').then(res=>res.json()).then(function draw(dat
       ]}
     ]
   });
-  webix.protoUI({
-    name:"editlist"
-  }, webix.EditAbility, webix.ui.list);
+  //popup component
   webix.ui({
     view:"popup",
     id:"role_pop",
