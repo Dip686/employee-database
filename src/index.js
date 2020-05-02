@@ -132,8 +132,8 @@ fetch('http://localhost:3000/data').then(res=>res.json()).then(function draw(dat
         { view:"text", id:"newRole", name:"newRole", placeholder:"New Role", width:180},
         {view:"toolbar",borderless:true,
           cols:[
-            { view:"button", id:"removeRole", value:"Remove", width:120, click: deleteRoles },
-            { view:"button", id:"saveRole", value:"Save Roles", width:120, click: saveRoles }
+            { view:"button", id:"saveRole", value:"Save Roles", width:120, click: saveRoles },
+            { view:"button", id:"removeRole", value:"Remove", width:120, click: deleteRoles }
           ]
         }
       ]
